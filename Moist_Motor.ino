@@ -15,28 +15,24 @@ void setup(){
 void loop() {
   // put your main code here, to run repeatedly:
 digitalWrite(4, HIGH);
- soilMoisture = analogRead(A0);
- Serial.println(soilMoisture);
- delay(100);
-  SoilLevel = soilLevel(soilMoisture);
-
-if(SoilLevel == BadLevel){
-  digitalWrite(4, LOW);
-  delay(5000);
-  digitalWrite(4, HIGH);
-  delay(10000);
+MotorControl(analogRead(A0));
 }
 
-Serial.println(soilMoisture);
+void MotorControl(int soilMoisture){
+  SoilLevel = soilLevel(soilMoisture);
 
-delay(100);
-
+  if(SoilLevel == BadLevel){
+    digitalWrite(4, LOW);
+    delay(5000);
+    digitalWrite(4, HIGH);
+    delay(10000);
+  }
 }
 
 int soilLevel(int x){
 if(x < 200){
   delay(1000);
-  if(x < 50){
+  if(x < 5){
     return 4;
   }
   else{ 
